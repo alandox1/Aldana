@@ -1,33 +1,49 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffe6f0;
+  background-color: #fff0f5;
   color: #333;
+  margin: 0;
   padding: 20px;
 }
 
 h1 {
   text-align: center;
   color: #c2185b;
+  margin-bottom: 40px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  max-width: 1200px;
-  margin: auto;
+.contenedor-malla {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.semestre {
+  background-color: #fce4ec;
+  border-radius: 15px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.semestre h2 {
+  text-align: center;
+  color: #ad1457;
+  margin-bottom: 15px;
 }
 
 .materia {
   background-color: #f8bbd0;
   border: 2px solid #c2185b;
-  padding: 15px;
+  color: #333;
+  padding: 10px;
+  margin-bottom: 10px;
   text-align: center;
+  border-radius: 8px;
   font-weight: bold;
-  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 2px 2px 5px #888;
+  transition: all 0.3s ease;
 }
 
 .materia:hover {
@@ -42,9 +58,8 @@ h1 {
 
 .materia.bloqueada {
   background-color: #fce4ec;
-  color: #aaa;
   border-style: dashed;
+  color: #999;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
