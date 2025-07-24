@@ -231,7 +231,7 @@ function renderCourses() {
 
             // Título de la materia
             const courseName = document.createElement('h3');
-            courseName.className = `text-xl font-semibold mb-2 ${textColor}`;
+            courseName.className = `text-xl font-semibold mb-2 ${textColor} ${course.status === 'completed' ? 'line-through' : ''}`; // APLICA EL TACHADO AQUÍ
             courseName.textContent = course.name;
             courseCard.appendChild(courseName);
 
@@ -343,3 +343,4 @@ document.getElementById('message-ok-button').addEventListener('click', hideMessa
 // Cargar las materias cuando la página se carga
 window.onload = loadCourses;
 console.log('script.js: Archivo cargado. Esperando window.onload.');
+
