@@ -4,28 +4,26 @@ document.querySelectorAll('.materia').forEach(materia => {
 
     materia.classList.toggle('aprobada');
 
-    const unlocks = materia.dataset.unlocks;
-    if (unlocks) {
-      const siguiente = document.querySelector(`[data-id="${unlocks}"]`);
+    const unlockId = materia.dataset.unlocks;
+    if (unlockId) {
+      const siguiente = document.querySelector(`[data-id="${unlockId}"]`);
       if (materia.classList.contains('aprobada')) {
-        siguiente.classList.remove('bloqueada');
+        siguiente?.classList.remove('bloqueada');
       } else {
-        siguiente.classList.add('bloqueada');
-        siguiente.classList.remove('aprobada');
-        // y se bloquean todos los descendientes
-        resetDescendientes(siguiente.dataset.unlocks);
+        bloquearConDescendientes(siguiente);
       }
     }
   });
 });
 
-function resetDescendientes(id) {
-  if (!id) return;
-  const mat = document.querySelector(`[data-id="${id}"]`);
-  if (mat) {
-    mat.classList.add('bloqueada');
-    mat.classList.remove('aprobada');
-    resetDescendientes(mat.dataset.unlocks);
+function bloquearConDescendientes(materia) {
+  if (!materia) return;
+  materia.classList.add('bloqueada');
+  materia.classList.remove('aprobada');
+  const nextId = materia.dataset.unlocks;
+  if (nextId) {
+    const siguiente = document.querySelector(`[data-id="${nextId}"]`);
+    bloquearConDescendientes(siguiente);
   }
 }
 
