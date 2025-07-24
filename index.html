@@ -1,2 +1,58 @@
-# Aldana
-Aldana
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Malla Interactiva FADU</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <h1>Malla Interactiva Diseño Gráfico - FADU</h1>
+  <div class="grid" id="malla">
+    <!-- CBC -->
+    <div class="materia" data-id="CBC">CBC</div>
+    <div class="materia" data-id="Dibujo">Dibujo</div>
+    <div class="materia" data-id="Proyectual I" data-unlocks="Proyectual II">Proyectual I</div>
+    <div class="materia bloqueada" data-id="Proyectual II">Proyectual II</div>
+    <div class="materia" data-id="Semiología">Semiología</div>
+    <div class="materia" data-id="Matemática">Matemática</div>
+    <div class="materia" data-id="Pensamiento Científico">Pensamiento Científico</div>
+    <div class="materia" data-id="Sociedad y estado">Sociedad y Estado</div>
+
+    <!-- PRIMER AÑO -->
+    <div class="materia" data-id="DG1" data-unlocks="DG2">DG1. Diseño Gráfico I</div>
+    <div class="materia" data-id="M1.1" data-unlocks="M1.2">M1. Morfología I</div>
+    <div class="materia bloqueada" data-id="M1.2">M1. Morfología II</div>
+    <div class="materia" data-id="TIP1" data-unlocks="TIP2">TIP1. Tipografía I</div>
+    <div class="materia bloqueada" data-id="TIP2">TIP2. Tipografía II</div>
+    <div class="materia" data-id="H1" data-unlocks="H2">H1. Historia I</div>
+    <div class="materia bloqueada" data-id="H2">H1. Historia II</div>
+    <div class="materia" data-id="C1" data-unlocks="C2">C1. Comunicación I</div>
+    <div class="materia bloqueada" data-id="C2">C2. Comunicación II</div>
+    <div class="materia" data-id="TEC1" data-unlocks="TEC2">TEC1. Tecnología I</div>
+    <div class="materia bloqueada" data-id="TEC2">TEC2. Tecnología II</div>
+    <div class="materia" data-id="Fotografía">ELECTIVA. Fotografía</div>
+    <div class="materia" data-id="Ilustración">ELECTIVA. Ilustración</div>
+
+    <!-- SEGUNDO AÑO -->
+    <div class="materia bloqueada" data-id="DG2" data-unlocks="DG3">DG2. Diseño Gráfico II</div>
+    <div class="materia bloqueada" data-id="DG3" data-unlocks="DG4">DG3. Diseño Gráfico III</div>
+    <div class="materia bloqueada" data-id="ME1" data-unlocks="ME2">ME1. Medios Expresivos I</div>
+    <div class="materia bloqueada" data-id="ME2">ME2. Medios Expresivos II</div>
+    <div class="materia bloqueada" data-id="LPP">LPP. Legislación y Práctica Profesional</div>
+    <div class="materia bloqueada" data-id="SocioHumanistica">ELECTIVA. Socio Humanística</div>
+
+    <!-- CUARTO AÑO -->
+    <div class="materia bloqueada" data-id="DG4">DG4. Diseño Gráfico IV</div>
+    <div class="materia bloqueada" data-id="MO1">MO1. Materia Optativa I</div>
+    <div class="materia bloqueada" data-id="MO2">MO2. Materia Optativa II</div>
+    <div class="materia bloqueada" data-id="SEM1">SEM1. Seminario Optativo I</div>
+    <div class="materia bloqueada" data-id="SEM2">SEM2. Seminario Optativo II</div>
+    <div class="materia bloqueada" data-id="SEM3">SEM3. Seminario Optativo III</div>
+    <div class="materia bloqueada" data-id="EO1">ELECTIVA DE FORMACIÓN ORIENTADA I</div>
+    <div class="materia bloqueada" data-id="EO2">ELECTIVA DE FORMACIÓN ORIENTADA II</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
