@@ -77,8 +77,10 @@ function hideMessage() {
 
 // Función para cargar el estado de las materias desde localStorage
 function loadCourses() {
+    console.log('loadCourses: Iniciando carga de materias...');
     const savedCourses = localStorage.getItem('studyPlannerCourses');
     if (savedCourses) {
+        console.log('loadCourses: Se encontraron datos guardados en localStorage.');
         const parsedSavedCourses = JSON.parse(savedCourses);
         // Mapeamos los cursos originales y aplicamos el estado guardado si existe.
         // Esto también asegura que los cursos nuevos se añadan si la lista original cambia.
@@ -87,15 +89,18 @@ function loadCourses() {
             return saved ? { ...course, status: saved.status } : { ...course, status: course.defaultStatus };
         });
     } else {
+        console.log('loadCourses: No se encontraron datos guardados, usando estado por defecto.');
         // Si no hay datos guardados, usamos el estado por defecto
         courses = allCoursesFlat.map(course => ({ ...course, status: course.defaultStatus }));
     }
+    console.log('loadCourses: Estado final de las materias:', courses);
     renderCourses();
 }
 
 // Función para guardar el estado actual de las materias en localStorage
 function saveCourses() {
     localStorage.setItem('studyPlannerCourses', JSON.stringify(courses.map(c => ({ id: c.id, status: c.status }))));
+    console.log('saveCourses: Estado de materias guardado en localStorage.');
 }
 
 // Función para verificar si los prerrequisitos están completos
@@ -139,7 +144,12 @@ function checkDependencies(courseId) {
 
 // Función para renderizar las tarjetas de las materias
 function renderCourses() {
+    console.log('renderCourses: Iniciando renderizado de materias.');
     const mallaContainer = document.getElementById('malla-container');
+    if (!mallaContainer) {
+        console.error('renderCourses: Elemento #malla-container no encontrado en el DOM.');
+        return; // Salir si el contenedor no existe
+    }
     mallaContainer.innerHTML = ''; // Limpiar el contenido actual
 
     // Agrupar cursos por año para la visualización
@@ -151,6 +161,7 @@ function renderCourses() {
     }, {});
 
     for (const year in coursesByYear) {
+        console.log(`renderCourses: Procesando año: ${year}`);
         const yearSection = document.createElement('div');
         yearSection.className = 'mb-8';
 
@@ -165,6 +176,7 @@ function renderCourses() {
         courseGrid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6';
 
         coursesByYear[year].forEach(course => {
+            console.log(`renderCourses: Creando tarjeta para ${course.name} (ID: ${course.id})`);
             const courseCard = document.createElement('div');
             courseCard.id = `course-${course.id}`;
             courseCard.className = `
@@ -255,10 +267,12 @@ function renderCourses() {
         yearSection.appendChild(courseGrid);
         mallaContainer.appendChild(yearSection);
     }
+    console.log('renderCourses: Renderizado de materias completado.');
 }
 
 // Función para cambiar el estado de una materia
 function toggleCourseStatus(courseId) {
+    console.log(`toggleCourseStatus: Intentando cambiar estado para ID: ${courseId}`);
     const courseIndex = courses.findIndex(c => c.id === courseId);
     if (courseIndex > -1) {
         const currentStatus = courses[courseIndex].status;
@@ -269,6 +283,7 @@ function toggleCourseStatus(courseId) {
             const prereqCheck = checkPrerequisites(courseId);
             if (!prereqCheck.canProceed) {
                 showMessage(prereqCheck.message);
+                console.warn(`toggleCourseStatus: No se puede iniciar ${courses[courseIndex].name} por prerrequisitos.`);
                 return; // No permite el cambio
             }
             newStatus = 'inProgress';
@@ -280,25 +295,32 @@ function toggleCourseStatus(courseId) {
             const dependencyCheck = checkDependencies(courseId);
             if (!dependencyCheck.canProceed) {
                 showMessage(dependencyCheck.message);
+                console.warn(`toggleCourseStatus: No se puede revertir ${courses[courseIndex].name} por dependencias.`);
                 return; // No permite el cambio
             }
             newStatus = 'pending';
         }
 
         courses[courseIndex].status = newStatus;
+        console.log(`toggleCourseStatus: ${courses[courseIndex].name} cambiado a estado: ${newStatus}`);
         saveCourses(); // Guardar el nuevo estado
         renderCourses(); // Volver a renderizar la malla
+    } else {
+        console.error(`toggleCourseStatus: Materia con ID ${courseId} no encontrada.`);
     }
 }
 
 // Función para restablecer la malla a su estado por defecto
 function resetPlanner() {
+    console.log('resetPlanner: Iniciando proceso de restablecimiento.');
     // Usamos el modal personalizado para la confirmación
     showMessage('¿Estás seguro de que quieres restablecer toda la malla? Se perderá tu progreso.');
     document.getElementById('message-ok-button').onclick = () => {
+        console.log('resetPlanner: Confirmación de restablecimiento recibida.');
         localStorage.removeItem('studyPlannerCourses');
         loadCourses(); // Recargar para mostrar el estado por defecto
         hideMessage();
+        console.log('resetPlanner: Malla restablecida.');
     };
 }
 
@@ -311,3 +333,4 @@ document.getElementById('message-ok-button').addEventListener('click', hideMessa
 
 // Cargar las materias cuando la página se carga
 window.onload = loadCourses;
+console.log('script.js: Archivo cargado. Esperando window.onload.');
