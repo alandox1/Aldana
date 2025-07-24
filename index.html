@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Malla Interactiva de Materias</title>
+
+    <!-- Enlace al archivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS CDN para estilos rápidos y responsivos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de Tailwind para usar la fuente Inter y colores personalizados
+        // Esta configuración debe estar en el HTML o en un script cargado antes de que Tailwind procese los estilos.
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        pending: '#cbd5e1', // Gris claro - Pendiente
+                        inProgress: '#fcd34d', // Amarillo - En Curso
+                        completed: '#34d399', // Verde - Completada
+                        accent: '#4f46e5', // Morado - Color de acento
+                        darkText: '#1f2937', // Gris oscuro para texto
+                        lightText: '#f9fafb', // Blanco para texto
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 text-darkText">
+
     <div class="w-full max-w-7xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-center text-accent mb-8">
             Mi Malla Interactiva de Materias
@@ -22,7 +52,7 @@
             </div>
         </div>
 
-        <!-- Contenedor principal de la malla -->
+        <!-- Contenedor principal de la malla (donde JS inyectará las materias) -->
         <div id="malla-container">
             <!-- Las secciones por año y las tarjetas de materias se renderizarán aquí con JavaScript -->
         </div>
@@ -42,3 +72,8 @@
             <button id="message-ok-button" class="bg-accent hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">OK</button>
         </div>
     </div>
+
+    <!-- Enlace al archivo de JavaScript (se carga al final para asegurar que el HTML esté listo) -->
+    <script src="script.js"></script>
+</body>
+</html>
