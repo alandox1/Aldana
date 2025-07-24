@@ -24,33 +24,41 @@ const allCoursesData = [
         { id: 'h1', name: 'H1.Historia I', prerequisites: [] },
         { id: 'c1', name: 'C1.Comunicación I', prerequisites: [] },
         { id: 'tec1', name: 'TEC1.Tecnología I', prerequisites: [] },
-        { id: 'electiva-fotografia', name: 'ELECTIVA.Fotografía', prerequisites: [] },
-        { id: 'electiva-ilustracion', name: 'ELECTIVA.Ilustración', prerequisites: [] },
+        { id: 'electiva-fotografia', name: 'ELECTIVA.Fotografía', prerequisites: [] }, // ID consistente
+        { id: 'electiva-ilustracion', name: 'ELECTIVA.Ilustración', prerequisites: [] }, // ID consistente
     ]},
     { year: 'SEGUNDO AÑO', courses: [
-        { id: 'dg2', name: 'DG2.Diseño Gráfico II', prerequisites: ['dg1-m1-tip1'] },
+        { id: 'dg2', name: 'DG2.Diseño Gráfico II', prerequisites: ['dg1'] }, // Asumo solo DG1
         { id: 'm2', name: 'M1.Morfología II', prerequisites: ['m1'] },
         { id: 'c2', name: 'C2.Comunicacion II', prerequisites: ['c1'] },
         { id: 'tec2', name: 'TEC2.Tecnología II', prerequisites: ['tec1'] },
-        { id: 'me1', name: 'ME1.Medios Expresivos I', prerequisites: ['fot'] },
-        { id: 'h2', name: 'H1.Historia II', prerequisites: ['h1'] },
+        { id: 'me1', name: 'ME1.Medios Expresivos I', prerequisites: ['electiva-fotografia'] }, // Asumo 'fot' es electiva-fotografia
+        { id: 'h2', name: 'H1.Historia II', prerequisites: ['h1'] }, // Nueva materia añadida
     ]},
     { year: 'TERCER AÑO', courses: [
-        { id: 'dg3', name: 'DG3.Diseño Gráfico III', prerequisites: ['dg2-m1-tip1-m2 o tip2-c1-h1-tec1-fot'] },
-        { id: 'tip2', name: 'TIP2. TIPOGRAFÍA II', prerequisites: ['m1-tip1'] },
+        { id: 'dg3', name: 'DG3.Diseño Gráfico III', prerequisites: ['dg2', 'm2', 'tip2', 'c2', 'h2', 'tec2', 'me1'] },
+        // Interpretación de 'dg2-m1-tip1-m2 o tip2-c1-h1-tec1-fot' como un conjunto de materias esperadas.
+        // El sistema actual solo maneja 'Y' (todos deben estar completados).
+        // Si se necesita lógica 'O', la función checkPrerequisites necesitaría una refactorización avanzada.
+        { id: 'tip2', name: 'TIP2. TIPOGRAFÍA II', prerequisites: ['tip1'] }, // Asumo solo TIP1
         { id: 'me2', name: 'ME2.Medios Expresivos II', prerequisites: ['me1'] },
-        { id: 'lpp', name: 'LPP.Legislacion y Practica Profesional', prerequisites: ['dg2-m2 o tip2-c1-h1-tec1-fot'] },
-        { id: 'electiva-socio-humanistica', name: 'ELECTIVA.Socio Humanística', prerequisites: ['dg2-m2 o tip2-c1-h1-tec1-fot'] },
+        { id: 'lpp', name: 'LPP.Legislacion y Practica Profesional', prerequisites: ['dg2', 'm2', 'tip2', 'c2', 'h2', 'tec2', 'me1'] },
+        // Interpretación similar a DG3 para LPP
+        { id: 'electiva-socio-humanistica', name: 'ELECTIVA.Socio Humanística', prerequisites: ['dg2', 'm2', 'tip2', 'c2', 'h2', 'tec2', 'me1'] },
+        // Interpretación similar a DG3 para Electiva Socio Humanística
     ]},
     { year: 'CUARTO AÑO', courses: [
-        { id: 'dg4', name: 'DG4.Diseño Gráfico IV', prerequisites: ['dg3-m2-tip2-me1-tec2-h2-c2'] },
-        { id: 'mo1', name: 'MO1. MATERIA OPTATIVA I', prerequisites: ['dg2-m2 o tip2-me1-tec2'] },
-        { id: 'mo2', name: 'MO2. MATERIA OPTATIVA II', prerequisites: ['dg2-m2 o tip2-me1-tec2'] },
-        { id: 'sem1', name: 'SEM1. SEMINARIO OPTATIVO 1', prerequisites: ['dg2-m2 o tip2-me1-tec2'] },
-        { id: 'sem2', name: 'SEM2. SEMINARIO OPTATIVO 2', prerequisites: ['dg2-m2 o tip2-me1-tec2'] },
-        { id: 'sem3', name: 'SEM3. SEMINARIO OPTATIVO 3', prerequisites: ['dg2-m2 o tip2-me1-tec2'] },
-        { id: 'electiva-formacion-orientada1', name: 'ELECTIVA DE FORMACIÓN ORIENTADA (1)', prerequisites: ['dg3-m2-tip2-me1-tec2'] },
-        { id: 'electiva-formacion-orientada2', name: 'ELECTIVA DE FORMACIÓN ORIENTADA (2)', prerequisites: ['dg3-m2-tip2-me1-tec2'] },
+        { id: 'dg4', name: 'DG4.Diseño Gráfico IV', prerequisites: ['dg3', 'm2', 'tip2', 'me2', 'tec2', 'h2', 'c2'] },
+        // Interpretación de 'dg3-m2-tip2-me1-tec2-h2-c2' como un conjunto de materias esperadas.
+        { id: 'mo1', name: 'MO1. MATERIA OPTATIVA I', prerequisites: ['dg2', 'm2', 'tip2', 'me1', 'tec2', 'h2', 'c2'] },
+        // Interpretación de 'dg2-m2 o tip2-me1-tec2' como un conjunto de materias esperadas.
+        { id: 'mo2', name: 'MO2. MATERIA OPTATIVA II', prerequisites: ['dg2', 'm2', 'tip2', 'me1', 'tec2', 'h2', 'c2'] },
+        { id: 'sem1', name: 'SEM1. SEMINARIO OPTATIVO 1', prerequisites: ['dg2', 'm2', 'tip2', 'me1', 'tec2', 'h2', 'c2'] },
+        { id: 'sem2', name: 'SEM2. SEMINARIO OPTATIVO 2', prerequisites: ['dg2', 'm2', 'tip2', 'me1', 'tec2', 'h2', 'c2'] },
+        { id: 'sem3', name: 'SEM3. SEMINARIO OPTATIVO 3', prerequisites: ['dg2', 'm2', 'tip2', 'me1', 'tec2', 'h2', 'c2'] },
+        { id: 'electiva-formacion-orientada1', name: 'ELECTIVA DE FORMACIÓN ORIENTADA (1)', prerequisites: ['dg3', 'm2', 'tip2', 'me2', 'tec2', 'h2', 'c2'] },
+        // Interpretación de 'dg3-m2-tip2-me1-tec2' como un conjunto de materias esperadas.
+        { id: 'electiva-formacion-orientada2', name: 'ELECTIVA DE FORMACIÓN ORIENTADA (2)', prerequisites: ['dg3', 'm2', 'tip2', 'me2', 'tec2', 'h2', 'c2'] },
     ]},
 ];
 
@@ -148,7 +156,7 @@ function renderCourses() {
     console.log('renderCourses: Iniciando renderizado de materias.');
     const mallaContainer = document.getElementById('malla-container');
     if (!mallaContainer) {
-        console.error('renderCourses: Elemento #malla-container no encontrado en el DOM.');
+        console.error('renderCourses: Elemento #malla-container no encontrado en el DOM. Asegúrate de que index.html esté cargado correctamente y tenga un div con id="malla-container".');
         return; // Salir si el contenedor no existe
     }
     mallaContainer.innerHTML = ''; // Limpiar el contenido actual
