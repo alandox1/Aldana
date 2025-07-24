@@ -1,61 +1,43 @@
-<script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Configuración de Tailwind para usar la fuente Inter y colores personalizados
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        pending: '#cbd5e1', // Gris claro - Pendiente
-                        inProgress: '#fcd34d', // Amarillo - En Curso
-                        completed: '#34d399', // Verde - Completada
-                        accent: '#4f46e5', // Morado - Color de acento
-                        darkText: '#1f2937', // Gris oscuro para texto
-                        lightText: '#f9fafb', // Blanco para texto
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Estilos personalizados adicionales para el scrollbar */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Fondo gris claro */
-        }
-        body::-webkit-scrollbar {
-            display: none; /* Ocultar scrollbar para navegadores basados en WebKit */
-        }
-        body {
-            -ms-overflow-style: none;  /* Ocultar scrollbar para IE y Edge */
-            scrollbar-width: none;  /* Ocultar scrollbar para Firefox */
-        }
-        /* Estilos para el botón de restablecer */
-        #reset-button {
-            background-color: #ef4444; /* red-500 */
-            transition: all 0.3s ease-in-out;
-        }
-        #reset-button:hover {
-            background-color: #dc2626; /* red-600 */
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        #reset-button:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5); /* ring-red-500 */
-        }
+*
+ * Archivo: style.css
+ * Descripción: Contiene los estilos CSS personalizados para la malla interactiva de materias.
+ * La mayoría de los estilos provienen de Tailwind CSS directamente en el HTML.
+ */
 
-        /* Estilos para las tarjetas de materias */
-        .course-card {
-            border-width: 2px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .course-card:hover {
-            transform: translateY(-3px); /* Pequeño efecto de elevación al pasar el ratón */
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 text-darkText">
+body {
+    font-family: 'Inter', sans-serif; /* Fuente definida en Tailwind config en HTML */
+    background-color: #f3f4f6; /* Fondo gris claro */
+}
 
+/* Ocultar el scrollbar para una apariencia más limpia, pero mantener la funcionalidad */
+body::-webkit-scrollbar {
+    display: none; /* Para navegadores basados en WebKit (Chrome, Safari) */
+}
+body {
+    -ms-overflow-style: none;  /* Para IE y Edge */
+    scrollbar-width: none;  /* Para Firefox */
+}
+
+/* Estilos para el botón de restablecer */
+#reset-button {
+    background-color: #ef4444; /* red-500 de Tailwind */
+    transition: all 0.3s ease-in-out; /* Transición suave para efectos hover */
+}
+#reset-button:hover {
+    background-color: #dc2626; /* red-600 de Tailwind */
+    transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
+}
+#reset-button:focus {
+    outline: none; /* Eliminar el contorno por defecto al enfocar */
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5); /* Anillo de enfoque (ring-red-500 de Tailwind) */
+}
+
+/* Estilos para las tarjetas de materias */
+.course-card {
+    border-width: 2px; /* Borde para las tarjetas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+.course-card:hover {
+    transform: translateY(-3px); /* Pequeño efecto de elevación al pasar el ratón */
+}
