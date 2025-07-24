@@ -188,56 +188,70 @@ function renderCourses() {
             console.log(`renderCourses: Creando tarjeta para ${course.name} (ID: ${course.id})`);
             const courseCard = document.createElement('div');
             courseCard.id = `course-${course.id}`;
+
+            let borderColor = '';
+            let bgColor = '';
+            let textColor = 'text-darkText'; // Default text color
+            let isClickable = true; // Flag to control clickability
+            let cursorClass = 'cursor-pointer'; // Default cursor
+
+            const prereqCheck = checkPrerequisites(course.id);
+
+            // Determine colors and clickability based on status and prerequisites
+            if (course.status === 'pending' && !prereqCheck.canProceed) {
+                // If pending AND prerequisites not met, make it grey and unclickable
+                borderColor = 'border-gray-300';
+                bgColor = 'bg-gray-100'; // Light gray background
+                textColor = 'text-gray-500'; // Darker gray text
+                isClickable = false;
+                cursorClass = 'cursor-not-allowed';
+            } else {
+                // Apply normal status colors
+                switch (course.status) {
+                    case 'pending':
+                        borderColor = 'border-pending';
+                        bgColor = 'bg-gray-50';
+                        break;
+                    case 'inProgress':
+                        borderColor = 'border-inProgress';
+                        bgColor = 'bg-yellow-50';
+                        break;
+                    case 'completed':
+                        borderColor = 'border-completed';
+                        bgColor = 'bg-green-50';
+                        break;
+                    default:
+                        borderColor = 'border-gray-200';
+                        bgColor = 'bg-white';
+                }
+            }
+            
+            // Apply common styles and conditional styles
             courseCard.className = `
                 course-card
-                bg-white
                 p-6
                 rounded-xl
                 shadow-md
                 border-2
-                cursor-pointer
                 transition-all
                 duration-300
                 ease-in-out
                 flex flex-col
                 justify-between
-                transform hover:scale-105
-                focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50
+                ${borderColor} ${bgColor} ${textColor} ${cursorClass}
+                ${isClickable ? 'transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50' : ''}
             `;
-
-            // Determinar el color del borde y fondo según el estado
-            let borderColor = '';
-            let bgColor = '';
-            let textColor = 'text-darkText'; // Color de texto por defecto
-
-            switch (course.status) {
-                case 'pending':
-                    borderColor = 'border-pending';
-                    bgColor = 'bg-gray-50';
-                    break;
-                case 'inProgress':
-                    borderColor = 'border-inProgress';
-                    bgColor = 'bg-yellow-50';
-                    break;
-                case 'completed':
-                    borderColor = 'border-completed';
-                    bgColor = 'bg-green-50';
-                    break;
-                default:
-                    borderColor = 'border-gray-200';
-                    bgColor = 'bg-white';
-            }
-            courseCard.classList.add(borderColor, bgColor);
 
             // Título de la materia
             const courseName = document.createElement('h3');
-            courseName.className = `text-xl font-semibold mb-2 ${textColor} ${course.status === 'completed' ? 'line-through' : ''}`; // APLICA EL TACHADO AQUÍ
+            // Apply line-through only if completed, otherwise use normal text color
+            courseName.className = `text-xl font-semibold mb-2 ${textColor} ${course.status === 'completed' ? 'line-through' : ''}`;
             courseName.textContent = course.name;
             courseCard.appendChild(courseName);
 
             // Estado actual de la materia
             const courseStatus = document.createElement('p');
-            courseStatus.className = `text-sm font-medium ${textColor}`;
+            courseStatus.className = `text-sm font-medium ${textColor}`; // Use the determined textColor
             courseStatus.textContent = `Estado: ${
                 course.status === 'pending' ? 'Pendiente' :
                 course.status === 'inProgress' ? 'En Curso' :
@@ -268,8 +282,10 @@ function renderCourses() {
                 courseCard.appendChild(prereqContainer);
             }
 
-            // Event listener para cambiar el estado al hacer clic
-            courseCard.addEventListener('click', () => toggleCourseStatus(course.id));
+            // Event listener for changing status on click
+            if (isClickable) {
+                courseCard.addEventListener('click', () => toggleCourseStatus(course.id));
+            }
 
             courseGrid.appendChild(courseCard);
         });
@@ -343,3 +359,4 @@ document.getElementById('message-ok-button').addEventListener('click', hideMessa
 // Cargar las materias cuando la página se carga
 window.onload = loadCourses;
 console.log('script.js: Archivo cargado. Esperando window.onload.');
+
