@@ -1,65 +1,61 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fff0f5;
-  color: #333;
-  margin: 0;
-  padding: 20px;
-}
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de Tailwind para usar la fuente Inter y colores personalizados
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        pending: '#cbd5e1', // Gris claro - Pendiente
+                        inProgress: '#fcd34d', // Amarillo - En Curso
+                        completed: '#34d399', // Verde - Completada
+                        accent: '#4f46e5', // Morado - Color de acento
+                        darkText: '#1f2937', // Gris oscuro para texto
+                        lightText: '#f9fafb', // Blanco para texto
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados adicionales para el scrollbar */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Fondo gris claro */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Ocultar scrollbar para navegadores basados en WebKit */
+        }
+        body {
+            -ms-overflow-style: none;  /* Ocultar scrollbar para IE y Edge */
+            scrollbar-width: none;  /* Ocultar scrollbar para Firefox */
+        }
+        /* Estilos para el botón de restablecer */
+        #reset-button {
+            background-color: #ef4444; /* red-500 */
+            transition: all 0.3s ease-in-out;
+        }
+        #reset-button:hover {
+            background-color: #dc2626; /* red-600 */
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #reset-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5); /* ring-red-500 */
+        }
 
-h1 {
-  text-align: center;
-  color: #c2185b;
-  margin-bottom: 40px;
-}
-
-.contenedor-malla {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.semestre {
-  background-color: #fce4ec;
-  border-radius: 15px;
-  padding: 20px;
-  width: 250px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.semestre h2 {
-  text-align: center;
-  color: #ad1457;
-  margin-bottom: 15px;
-}
-
-.materia {
-  background-color: #f8bbd0;
-  border: 2px solid #c2185b;
-  color: #333;
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.materia:hover {
-  background-color: #f48fb1;
-}
-
-.materia.aprobada {
-  background-color: #c2185b;
-  color: white;
-  text-decoration: line-through;
-}
-
-.materia.bloqueada {
-  background-color: #fce4ec;
-  border-style: dashed;
-  color: #999;
-  cursor: not-allowed;
-}
+        /* Estilos para las tarjetas de materias */
+        .course-card {
+            border-width: 2px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .course-card:hover {
+            transform: translateY(-3px); /* Pequeño efecto de elevación al pasar el ratón */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 text-darkText">
 
