@@ -1,73 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Interactiva</title>
-  <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-  <h1>Malla Interactiva - Diseño Gráfico</h1>
-  <div class="contenedor-malla">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Malla Interactiva de Materias</title>
+    <div class="w-full max-w-7xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-center text-accent mb-8">
+            Mi Malla Interactiva de Materias
+        </h1>
 
-    <div class="semestre">
-      <h2>CBC</h2>
-      <div class="materia" data-id="Dibujo">Dibujo</div>
-      <div class="materia" data-id="Proyectual I" data-unlocks="Proyectual II">Proyectual I</div>
-      <div class="materia bloqueada" data-id="Proyectual II">Proyectual II</div>
-      <div class="materia" data-id="Semiología">Semiología</div>
-      <div class="materia" data-id="Matemática">Matemática</div>
-      <div class="materia" data-id="Pensamiento Científico">Pensamiento Científico</div>
-      <div class="materia" data-id="Sociedad y estado">Sociedad y estado</div>
+        <!-- Leyenda de estados -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <div class="flex items-center gap-2 px-3 py-1 bg-pending rounded-full shadow-sm text-sm sm:text-base">
+                <span class="w-3 h-3 rounded-full bg-pending border border-gray-400"></span> Pendiente
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-inProgress rounded-full shadow-sm text-sm sm:text-base">
+                <span class="w-3 h-3 rounded-full bg-inProgress border border-yellow-600"></span> En Curso
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-completed rounded-full shadow-sm text-sm sm:text-base">
+                <span class="w-3 h-3 rounded-full bg-completed border border-green-600"></span> Completada
+            </div>
+        </div>
+
+        <!-- Contenedor principal de la malla -->
+        <div id="malla-container">
+            <!-- Las secciones por año y las tarjetas de materias se renderizarán aquí con JavaScript -->
+        </div>
+
+        <!-- Botón de restablecer -->
+        <div class="flex justify-center mt-10">
+            <button id="reset-button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                Restablecer Malla
+            </button>
+        </div>
     </div>
 
-    <div class="semestre">
-      <h2>Primer Año</h2>
-      <div class="materia" data-id="DG1.Diseño Gráfico I" data-unlocks="DG2.Diseño Gráfico II">DG1.Diseño Gráfico I</div>
-      <div class="materia" data-id="M1.Morfología I" data-unlocks="M1.Morfología II">M1.Morfología I</div>
-      <div class="materia bloqueada" data-id="M1.Morfología II">M1.Morfología II</div>
-      <div class="materia" data-id="TIP1. TIPOGRAFÍA I" data-unlocks="TIP2. TIPOGRAFÍA II">TIP1. TIPOGRAFÍA I</div>
-      <div class="materia bloqueada" data-id="TIP2. TIPOGRAFÍA II">TIP2. TIPOGRAFÍA II</div>
-      <div class="materia" data-id="H1.Historia I" data-unlocks="H1.Historia II">H1.Historia I</div>
-      <div class="materia bloqueada" data-id="H1.Historia II">H1.Historia II</div>
-      <div class="materia" data-id="C1.Comunicación I" data-unlocks="C2.Comunicación II">C1.Comunicación I</div>
-      <div class="materia bloqueada" data-id="C2.Comunicación II">C2.Comunicación II</div>
-      <div class="materia" data-id="TEC1.Tecnología I" data-unlocks="TEC2.Tecnología II">TEC1.Tecnología I</div>
-      <div class="materia bloqueada" data-id="TEC2.Tecnología II">TEC2.Tecnología II</div>
-      <div class="materia" data-id="ELECTIVA.Fotografía">ELECTIVA.Fotografía</div>
-      <div class="materia" data-id="ELECTIVA.Ilustración">ELECTIVA.Ilustración</div>
+    <!-- Contenedor del mensaje modal personalizado -->
+    <div id="message-box" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <p id="message-text" class="text-lg font-semibold mb-4 text-darkText"></p>
+            <button id="message-ok-button" class="bg-accent hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">OK</button>
+        </div>
     </div>
-
-    <div class="semestre">
-      <h2>Segundo Año</h2>
-      <div class="materia bloqueada" data-id="DG2.Diseño Gráfico II" data-unlocks="DG3.Diseño Gráfico III">DG2.Diseño Gráfico II</div>
-      <div class="materia bloqueada" data-id="DG3.Diseño Gráfico III" data-unlocks="DG4.Diseño Gráfico IV">DG3.Diseño Gráfico III</div>
-      <div class="materia bloqueada" data-id="C2.Comunicacion II">C2.Comunicacion II</div>
-      <div class="materia bloqueada" data-id="TEC2.Tecnología II">TEC2.Tecnología II</div>
-      <div class="materia bloqueada" data-id="ME1.Medios Expresivos I" data-unlocks="ME2.Medios Expresivos II">ME1.Medios Expresivos I</div>
-      <div class="materia bloqueada" data-id="ME2.Medios Expresivos II">ME2.Medios Expresivos II</div>
-    </div>
-
-    <div class="semestre">
-      <h2>Tercer Año</h2>
-      <div class="materia bloqueada" data-id="TIP2. TIPOGRAFÍA II">TIP2. TIPOGRAFÍA II</div>
-      <div class="materia bloqueada" data-id="LPP.Legislacion y Practica Profesional">LPP.Legislacion y Practica Profesional</div>
-      <div class="materia bloqueada" data-id="ELECTIVA.Socio Humanística">ELECTIVA.Socio Humanística</div>
-    </div>
-
-    <div class="semestre">
-      <h2>Cuarto Año</h2>
-      <div class="materia bloqueada" data-id="DG4.Diseño Gráfico IV">DG4.Diseño Gráfico IV</div>
-      <div class="materia bloqueada" data-id="MO1. MATERIA OPTATIVA I">MO1. MATERIA OPTATIVA I</div>
-      <div class="materia bloqueada" data-id="MO2. MATERIA OPTATIVA II">MO2. MATERIA OPTATIVA II</div>
-      <div class="materia bloqueada" data-id="SEM1. SEMINARIO OPTATIVO 1">SEM1. SEMINARIO OPTATIVO 1</div>
-      <div class="materia bloqueada" data-id="SEM2. SEMINARIO OPTATIVO 2">SEM2. SEMINARIO OPTATIVO 2</div>
-      <div class="materia bloqueada" data-id="SEM3. SEMINARIO OPTATIVO 3">SEM3. SEMINARIO OPTATIVO 3</div>
-      <div class="materia bloqueada" data-id="ELECTIVA DE FORMACIÓN ORIENTADA">ELECTIVA DE FORMACIÓN ORIENTADA</div>
-    </div>
-
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
