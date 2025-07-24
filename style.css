@@ -1,4 +1,4 @@
-*
+/*
  * Archivo: style.css
  * Descripción: Contiene los estilos CSS personalizados para la malla interactiva de materias.
  * La mayoría de los estilos provienen de Tailwind CSS directamente en el HTML.
@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Inter', sans-serif; /* Fuente definida en Tailwind config en HTML */
-    background-color: #fda4af; /* Fondo gris claro */
+    background-color: #fda4af; /* Fondo actualizado a un tono de rosa */
 }
 
 /* Ocultar el scrollbar para una apariencia más limpia, pero mantener la funcionalidad */
@@ -20,17 +20,17 @@ body {
 
 /* Estilos para el botón de restablecer */
 #reset-button {
-    background-color: #ef4444; /* red-500 de Tailwind */
+    background-color: #ef4444; /* Rojo para restablecer, se mantiene para contraste */
     transition: all 0.3s ease-in-out; /* Transición suave para efectos hover */
 }
 #reset-button:hover {
-    background-color: #dc2626; /* red-600 de Tailwind */
+    background-color: #dc2626; /* Rojo más oscuro para hover */
     transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
 }
 #reset-button:focus {
     outline: none; /* Eliminar el contorno por defecto al enfocar */
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5); /* Anillo de enfoque (ring-red-500 de Tailwind) */
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5); /* Anillo de enfoque */
 }
 
 /* Estilos para las tarjetas de materias */
