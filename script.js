@@ -359,4 +359,3 @@ document.getElementById('message-ok-button').addEventListener('click', hideMessa
 // Cargar las materias cuando la página se carga
 window.onload = loadCourses;
 console.log('script.js: Archivo cargado. Esperando window.onload.');
-
