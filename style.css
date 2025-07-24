@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Inter', sans-serif; /* Fuente definida en Tailwind config en HTML */
-    background-color: #F75636; /* Fondo gris claro */
+    background-color: #fda4af; /* Fondo gris claro */
 }
 
 /* Ocultar el scrollbar para una apariencia más limpia, pero mantener la funcionalidad */
